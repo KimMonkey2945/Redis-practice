@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '4.1.1'
+    id 'org.springframework.boot' version '3.5.6'
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
@@ -14,31 +14,34 @@ java {
     }
 }
 
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5'
+    runtimeOnly 'org.postgresql:postgresql'
 
-    // Swagger UI (FastAPI의 /docs 역할) - 직접 추가
+    // Swagger UI (FastAPI의 /docs 역할)
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.9'
 
-    // 코드 수정 시 자동 재시작 (uvicorn --reload 역할) - 직접 추가
+    // 코드 수정 시 자동 재시작 (uvicorn --reload 역할)
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
-    testImplementation 'org.springframework.boot:spring-boot-starter-data-redis-test'
-    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
-    testCompileOnly 'org.projectlombok:lombok'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {
