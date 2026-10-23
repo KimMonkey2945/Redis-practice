@@ -5,6 +5,11 @@ spring:
       port: 6379
       database: 0
 
+#  cache:
+#     type: redis
+#     redis:
+#      time-to-live: 1h
+
   datasource:
     url: jdbc:postgresql://localhost:5432/redis_study
     username: postgres
